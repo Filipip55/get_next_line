@@ -6,10 +6,19 @@
 /*   By: icoman <icoman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:02:12 by icoman            #+#    #+#             */
-/*   Updated: 2026/01/20 18:14:32 by icoman           ###   ########.fr       */
+/*   Updated: 2026/01/21 11:57:47 by icoman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+int	ft_strlen(char *s)
+{
+	int	i;
 
+	i = 0;
+	while (s[i])
+		i++;
+	//while (s[i++]);
+	return (i);
+}
