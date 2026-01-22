@@ -6,7 +6,7 @@
 /*   By: icoman <icoman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:02:19 by icoman            #+#    #+#             */
-/*   Updated: 2026/01/21 10:27:25 by icoman           ###   ########.fr       */
+/*   Updated: 2026/01/22 18:56:35 by icoman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,46 @@
 
 char	*get_next_line(int fd)
 {
-	static int	line = 0;
-	char	*buffer;
+	static t_list *buffers_head;
 
-	buffer = (char *)malloc();
-	line++;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	
+	buffers_head = get_node_by_fd(&buffers_head, fd);
+	if (!buffers_head)
+		return (NULL);
 }
 
-
-
-	
-
-void	*calloc(size_t nmemb, size_t size)
+/* cerca nodo per fd, se non esiste crea nuovo nodo e lo mette in testa */
+t_list	*get_node_by_fd(t_list **lst, int fd)
 {
-	unsigned char	*ptr;
-	unsigned int	total_size;
-	size_t	i;
-	char	*d;
-	
-	if (nmemb == 0 || size == 0)
-		total_size = 1;
-	else
-		total_size = nmemb * size;
-	ptr = malloc(total_size);
-	if (ptr == NULL)
+	t_list *curr;
+	t_list *new_node;
+
+	curr = *lst;
+	while (curr != NULL)
+	{
+		if (curr->fd == fd)
+			return (curr);
+		curr = curr->next;
+	}
+	new_node = lst_new_node(fd, NULL);
+	if (!new_node)
 		return (NULL);
-	d = (char *) ptr;
-	i = 0;
-	while (i < total_size)
-		d[i++] = '\0';
-	return (ptr);
+	new_node->next = *lst;
+	*lst = new_node;
+	return (new_node);
+}
+
+t_list	*lst_new_node(int fd, char *content)
+{
+	t_list	*node;
+
+	node = (t_list *)malloc(sizeof(t_list));
+	if (node == NULL)
+		return (NULL);
+	node->fd = fd;
+	node->content = content;
+	node->next = NULL;
+	return (node);
 }
