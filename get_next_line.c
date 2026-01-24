@@ -6,19 +6,20 @@
 /*   By: icoman <icoman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:02:19 by icoman            #+#    #+#             */
-/*   Updated: 2026/01/23 18:01:02 by icoman           ###   ########.fr       */
+/*   Updated: 2026/01/24 18:38:34 by icoman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/* Funzione principale
-	-svolge controlli preliminari 
+/* legge linea per linea un file
+	-una linea e' terminata da \n oppure EOF
 	-trova o crea il nodo corrispondente al fd
 	-legge dal file e accumula nello stash
 	-estrae dallo stash la riga da restituire
 	-ripulisce lo stash in caso di una eventuale prossima chiamata
-	-se lo stash è vuoto abbiamo raggiunto EOF, quindi elimina il nodo di quel fd */
+	-se lo stash è vuoto abbiamo raggiunto EOF,
+		quindi elimina il nodo di quel fd */
 char	*get_next_line(int fd)
 {
 	static t_list	*buffers_head = NULL;
@@ -43,15 +44,16 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/* legge dal file descriptor e aggiorna lo stash (stringa contenente i dati letti finora) */
-char *read_and_stash(int fd, char *stash)
+/* legge dal file descriptor e aggiorna 
+	lo stash (stringa contenente i dati letti finora) */
+char	*read_and_stash(int fd, char *stash)
 {
-	char    *buf;
-	int     read_bytes;
-	
+	char	*buf;
+	int		read_bytes;
+
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
-	return (NULL);
+		return (NULL);
 	read_bytes = 1;
 	while (!search_newline(stash) && read_bytes != 0)
 	{
@@ -72,9 +74,9 @@ char *read_and_stash(int fd, char *stash)
 char	*strjoin_and_free(char *stash, char *buf)
 {
 	char	*joined;
-	int	i;
-	int	j;
-	
+	int		i;
+	int		j;
+
 	if (!stash)
 	{
 		stash = malloc(sizeof(char));
@@ -114,7 +116,10 @@ char	*extract_line(char *stash)
 		return (NULL);
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
-		line[i] = stash[i++];
+	{
+		line[i] = stash[i];
+		i++;
+	}
 	if (stash[i] == '\n')
 		line[i++] = '\n';
 	line[i] = '\0';

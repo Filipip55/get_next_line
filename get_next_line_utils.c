@@ -6,7 +6,7 @@
 /*   By: icoman <icoman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:02:12 by icoman            #+#    #+#             */
-/*   Updated: 2026/01/23 18:01:40 by icoman           ###   ########.fr       */
+/*   Updated: 2026/01/24 18:34:09 by icoman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ t_list	*lst_new_node(int fd, char *content)
 	return (node);
 }
 
-/* ricerca nodo per fd, se non esiste crea nuovo nodo e lo mette in testa */
+/* ricerca nodo per fd, se non esiste 
+	crea nuovo nodo e lo mette in testa */
 t_list	*get_node_by_fd(t_list **lst, int fd)
 {
-	t_list *curr;
-	t_list *new_node;
+	t_list	*curr;
+	t_list	*new_node;
 
 	curr = *lst;
 	while (curr != NULL)
@@ -73,7 +74,8 @@ void	remove_node(t_list **lst, int fd)
 	}
 }
 
-/* ricerca e restituisce la prima istanza di newline in s */
+/* ricerca e restituisce la prima 
+	istanza di newline in s */
 char	*search_newline(char *s)
 {
 	if (!s)
@@ -95,7 +97,7 @@ int	ft_strlen(char *s)
 	len = 0;
 	if (!s)
 		return (0);
-	while (s[len++] != '\0')
+	while (s[len] != '\0')
 		len++;
 	return (len);
 }
