@@ -6,7 +6,7 @@
 /*   By: icoman <icoman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:02:23 by icoman            #+#    #+#             */
-/*   Updated: 2026/01/24 18:32:45 by icoman           ###   ########.fr       */
+/*   Updated: 2026/02/12 23:00:49 by icoman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ typedef struct s_list
 char	*get_next_line(int fd);
 t_list	*get_node_by_fd(t_list **lst, int fd);
 t_list	*lst_new_node(int fd, char *content);
-char	*read_and_stash(int fd, char *stash);
+char	*read_and_save(int fd, char *stash);
 char	*strjoin_and_free(char *stash, char *buf);
 char	*extract_line(char *stash);
-char	*update_stash(char *stash);
+char	*update_buffer(char *stash);
 void	remove_node(t_list **lst, int fd);
 char	*search_newline(char *s);
 int		ft_strlen(char *s);

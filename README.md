@@ -4,7 +4,7 @@
 ## Description
 **get_next_line** is a project from the 42 curriculum that challenges students to write a function capable of reading a line from a file descriptor, one line at a time. This project introduces the concept of static variables and file I/O operations, deepening understanding of memory management and buffer handling.
 
-The function must work efficiently with different buffer sizes and handle multiple file descriptors simultaneously (bonus implementation uses a linked list to manage separate buffers for each fd).
+The function must work efficiently with different buffer sizes and handle multiple file descriptors simultaneously
 
 ## Project Content
 
@@ -22,17 +22,17 @@ The function must work efficiently with different buffer sizes and handle multip
 
 ## Implementation Details
 
-### Core Functions (get_next_line_bonus.c)
+### Core Functions
 
 | Function | Description |
 | :--- | :--- |
 | `get_next_line` | Main function that orchestrates reading, extraction, and cleanup. |
-| `read_and_stash` | Reads from file descriptor and accumulates data in the stash. |
+| `read_and_save` | Reads from file descriptor and accumulates data in the stash. |
 | `strjoin_and_free` | Concatenates stash and buffer, freeing the old stash. |
 | `extract_line` | Extracts a complete line from the stash. |
-| `update_stash` | Updates the stash by removing the extracted line. |
+| `update_buffer` | Updates the stash by removing the extracted line. |
 
-### Helper Functions (get_next_line_utils_bonus.c)
+### Helper Functions
 
 | Function | Description |
 | :--- | :--- |
@@ -44,7 +44,7 @@ The function must work efficiently with different buffer sizes and handle multip
 
 ### Data Structure
 
-The bonus implementation uses a linked list to handle multiple file descriptors:
+This implementation uses a linked list to handle multiple file descriptors:
 
 ```c
 typedef struct s_list
@@ -69,32 +69,17 @@ typedef struct s_list
 6. **Cleanup**: Updates the stash to remove the extracted line
 7. **Memory Management**: Removes the node if stash is empty (EOF reached)
 
-### Key Concepts
 
-#### Static Variables
-- Uses a static linked list (`buffers_head`) to maintain state across function calls
-- Each node stores the buffer for a specific file descriptor
-- Allows simultaneous reading from multiple files
 
-#### Buffer Management
-- Reads in chunks of `BUFFER_SIZE` bytes
-- Handles lines longer than `BUFFER_SIZE` by accumulating data
-- Preserves leftover content after extracting a line
-
----
-
-## Instructions
-
-### Requirements
+## Requirements
 * `gcc` compiler
-* `make` (GNU Make)
 
 ## Installation
 
 You can compile manually with a custom `BUFFER_SIZE`:
 
 ```bash
-gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line_bonus.c get_next_line_utils_bonus.c -o gnl
+gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c -o gnl
 ```
 
 ### Usage
@@ -106,29 +91,7 @@ Include `get_next_line_bonus.h` in your program:
 
 int main(void)
 {
-    int     fd1;
-    int     fd2;
-    char    *line;
-
-    fd1 = open("file1.txt", O_RDONLY);
-    fd2 = open("file2.txt", O_RDONLY);
-    
-    // Read alternately from different files
-    line = get_next_line(fd1);
-    printf("File1: %s", line);
-    free(line);
-    
-    line = get_next_line(fd2);
-    printf("File2: %s", line);
-    free(line);
-    
-    line = get_next_line(fd1);
-    printf("File1: %s", line);
-    free(line);
-    
-    close(fd1);
-    close(fd2);
-    return (0);
+    ...
 }
 ```
 
@@ -137,20 +100,6 @@ Compile with:
 gcc -D BUFFER_SIZE=42 main.c get_next_line_bonus.c get_next_line_utils_bonus.c
 ```
 
-### Reading Complete Files
-
-```c
-int     fd;
-char    *line;
-
-fd = open("test.txt", O_RDONLY);
-while ((line = get_next_line(fd)) != NULL)
-{
-    printf("%s", line);
-    free(line);
-}
-close(fd);
-```
 
 ---
 
@@ -158,9 +107,9 @@ close(fd);
 
 ```
 get_next_line/
-├── get_next_line_bonus.c        # Main implementation
-├── get_next_line_utils_bonus.c  # Helper functions
-└── get_next_line_bonus.h        # Project header
+├── get_next_line.c        # Main implementation
+├── get_next_line_utils.c  # Helper functions
+└── get_next_line.h        # Project header
 ```
 
 ---
@@ -177,7 +126,7 @@ The buffer size can be defined at compilation time:
 ### Memory Management
 - Each line returned is dynamically allocated
 - **Caller must free** the returned line
-- Automatic cleanup when EOF is reached (node removal)
+- Automatic cleanup when EOF is reached by removing its respective node
 - No memory leaks even with large files or multiple descriptors
 
 ### Edge Cases Handled
@@ -214,13 +163,7 @@ Each file descriptor maintains its own:
 
 ---
 
-## Allowed Functions
 
-- `read`
-- `malloc`
-- `free`
-
----
 
 ## Resources
 
