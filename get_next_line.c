@@ -6,7 +6,7 @@
 /*   By: icoman <icoman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:02:19 by icoman            #+#    #+#             */
-/*   Updated: 2026/02/13 00:05:35 by icoman           ###   ########.fr       */
+/*   Updated: 2026/02/17 13:00:47 by icoman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*strjoin_and_free(char *buffer, char *tmp_buf)
 	}
 	if (!tmp_buf)
 		return (buffer);
-	joined = malloc(sizeof(char) * (ft_strlen(buffer) + ft_strlen(tmp_buf) + 1));
+	joined = malloc(ft_strlen(buffer) + ft_strlen(tmp_buf) + 1);
 	if (!joined)
 		return (free(buffer), NULL);
 	i = -1;
