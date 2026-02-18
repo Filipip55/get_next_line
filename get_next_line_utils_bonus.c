@@ -6,11 +6,11 @@
 /*   By: icoman <icoman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:02:12 by icoman            #+#    #+#             */
-/*   Updated: 2026/02/17 13:01:41 by icoman           ###   ########.fr       */
+/*   Updated: 2026/02/18 21:08:06 by icoman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 /* crea un nuovo nodo della lista */
 t_list	*lst_new_node(int fd, char *content)

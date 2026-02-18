@@ -6,11 +6,11 @@
 /*   By: icoman <icoman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:02:19 by icoman            #+#    #+#             */
-/*   Updated: 2026/02/17 13:01:18 by icoman           ###   ########.fr       */
+/*   Updated: 2026/02/18 21:07:48 by icoman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 /* legge linea per linea un file
 	-una linea e' terminata da \n oppure EOF
